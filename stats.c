@@ -1,10 +1,15 @@
 
 #define IN_ARRAY_SIZE   40
-#define STAT_ARRAY_SIZE 6
+#define STAT_ARRAY_SIZE 4
+
+#define MEAN_STAT_BYTE     0
+#define MAXIMUM_STAT_BYTE  1
+#define MINIMUM_STAT_BYTE  2
+#define MEDIAN_STAT_BYTE   3
 
 #include "stats.h"
 
-unsigned char stat_array[STAT_ARRAY_SIZE] = {0, 0, 0, 0, 0, 0};
+unsigned char stat_array[STAT_ARRAY_SIZE] = { 0, 0, 0, 0 };
 
 unsigned char in_array[IN_ARRAY_SIZE] =  { 1, 4, 0, 2, 5, 3, 10,50, 
                                            4, 2, 2, 1, 4, 43,31,34,
@@ -15,26 +20,25 @@ unsigned char in_array[IN_ARRAY_SIZE] =  { 1, 4, 0, 2, 5, 3, 10,50,
 int main() {
    // printf() displays the string inside quotation
    print_array(in_array, IN_ARRAY_SIZE);
-   printf( "mean: | %d |\n", find_mean(in_array, IN_ARRAY_SIZE) );
-   printf( "maximum: | %d |\n", find_maximum(in_array, IN_ARRAY_SIZE) );
-   printf( "minimum: | %d |\n", find_minimum(in_array, IN_ARRAY_SIZE) );
-   sort_array(in_array, IN_ARRAY_SIZE);
+
+   stat_array[MEAN_STAT_BYTE]    = find_mean( in_array, IN_ARRAY_SIZE );
+   stat_array[MAXIMUM_STAT_BYTE] = find_maximum( in_array, IN_ARRAY_SIZE );
+   stat_array[MINIMUM_STAT_BYTE] = find_minimum( in_array, IN_ARRAY_SIZE );
+   stat_array[MEDIAN_STAT_BYTE]  = find_median ( in_array, IN_ARRAY_SIZE );
+
    printf("sorted ");
    print_array(in_array, IN_ARRAY_SIZE);
-   printf( "median: | %d |\n", find_median(in_array, IN_ARRAY_SIZE) );
-
    print_statistics(stat_array, STAT_ARRAY_SIZE);
    return 0;
 }
 
 void print_statistics(unsigned char *data_stat, unsigned int size)
 {
-   printf("statistics: |");
-   for(int i = 0; i < size; i++)
-   {
-      printf(" %d |", data_stat[i]);
-   }
-   printf("\n");
+   printf("Statistics:\n");
+   printf( "maximum: | %d |\n", stat_array[MAXIMUM_STAT_BYTE] );
+   printf( "minimum: | %d |\n", stat_array[MINIMUM_STAT_BYTE] );
+   printf( "median:  | %d |\n", stat_array[MEDIAN_STAT_BYTE] );
+   printf( "mean:    | %d |\n", stat_array[MEAN_STAT_BYTE] );
 }
 
 void print_array(unsigned char *data, unsigned int size)
