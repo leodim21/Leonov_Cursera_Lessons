@@ -18,14 +18,14 @@ unsigned char in_array[IN_ARRAY_SIZE] =  { 1, 4, 0, 2, 5, 3, 10,50,
                                            11,12,13,14,16,14,20,2 };
 
 int main() {
-   // printf() displays the string inside quotation
+   // print input data 
    print_array(in_array, IN_ARRAY_SIZE);
-
+   // calculate statistic from in_array
    stat_array[MEAN_STAT_BYTE]    = find_mean( in_array, IN_ARRAY_SIZE );
    stat_array[MAXIMUM_STAT_BYTE] = find_maximum( in_array, IN_ARRAY_SIZE );
    stat_array[MINIMUM_STAT_BYTE] = find_minimum( in_array, IN_ARRAY_SIZE );
    stat_array[MEDIAN_STAT_BYTE]  = find_median ( in_array, IN_ARRAY_SIZE );
-
+   // print result and sorted array
    printf("sorted ");
    print_array(in_array, IN_ARRAY_SIZE);
    print_statistics(stat_array, STAT_ARRAY_SIZE);
