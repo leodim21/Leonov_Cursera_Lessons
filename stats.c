@@ -1,4 +1,27 @@
-
+/******************************************************************************
+ * Copyright (C) 2017 by Alex Fosdick - University of Colorado
+ *
+ * Redistribution, modification or use of this software in source or binary
+ * forms is permitted as long as the files maintain this copyright. Users are 
+ * permitted to modify this and use it to learn about the field of embedded
+ * software. Alex Fosdick and the University of Colorado are not liable for any
+ * misuse of this material. 
+ *
+ *****************************************************************************/
+/**
+ * @file <stats.c> 
+ * @brief <A C-programming code which sorts the array and calculates statistical parameters of a character array
+ 		- Median
+		- Mean
+		- Maximum Number
+		- Minimum Number
+		>
+ *
+ *
+ * @author <Dima Leonov>
+ * @date <12th September 2020>
+ *
+ */
 #define IN_ARRAY_SIZE   40
 #define STAT_ARRAY_SIZE 4
 
@@ -11,11 +34,11 @@
 
 unsigned char stat_array[STAT_ARRAY_SIZE] = { 0, 0, 0, 0 };
 
-unsigned char in_array[IN_ARRAY_SIZE] =  { 1, 4, 0, 2, 5, 3, 10,50, 
-                                           4, 2, 2, 1, 4, 43,31,34,
-                                           12,13,45,22,11,33,5, 7,
-                                           9, 8, 7, 6, 5, 4, 3, 0,
-                                           11,12,13,14,16,14,20,2 };
+  unsigned char in_array[IN_ARRAY_SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
+                                          114, 88,   45,  76, 123,  87,  25,  23,
+                                          200, 122, 150, 90,   92,  87, 177, 244,
+                                          201,   6,  12,  60,   8,   2,   5,  67,
+                                            7,  87, 250, 230,  99,   3, 100,  90 };
 
 int main() {
    // print input data 
@@ -54,16 +77,16 @@ void print_array(unsigned char *data, unsigned int size)
 unsigned char find_median(unsigned char *data, unsigned int size)
 {
    sort_array(data, size);
-   return data[size/2 - 1];
+   return data[size/2];
 }
 unsigned char find_mean(unsigned char *data, unsigned int size)
 {
-   int data_sum = 0;
-   for(int i = 0; i < size; i++)
+   int data_sum = data[0];
+   for(int i = 1; i < size; i++)
    {
       data_sum += data[i];
    }
-   return data_sum/size;
+   return (data_sum/size);
 }
 unsigned char find_maximum(unsigned char *data, unsigned int size)
 {
