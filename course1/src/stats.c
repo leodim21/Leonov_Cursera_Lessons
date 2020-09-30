@@ -31,6 +31,7 @@
 #define MEDIAN_STAT_BYTE   3
 
 #include "stats.h"
+#include "platform.h"
 
 unsigned char stat_array[STAT_ARRAY_SIZE] = { 0, 0, 0, 0 };
 
@@ -40,38 +41,30 @@ unsigned char stat_array[STAT_ARRAY_SIZE] = { 0, 0, 0, 0 };
                                           201,   6,  12,  60,   8,   2,   5,  67,
                                             7,  87, 250, 230,  99,   3, 100,  90 };
 
-int main() {
-   // print input data 
-   print_array(in_array, IN_ARRAY_SIZE);
-   // calculate statistic from in_array
-   stat_array[MEAN_STAT_BYTE]    = find_mean( in_array, IN_ARRAY_SIZE );
-   stat_array[MAXIMUM_STAT_BYTE] = find_maximum( in_array, IN_ARRAY_SIZE );
-   stat_array[MINIMUM_STAT_BYTE] = find_minimum( in_array, IN_ARRAY_SIZE );
-   stat_array[MEDIAN_STAT_BYTE]  = find_median ( in_array, IN_ARRAY_SIZE );
-   // print result and sorted array
-   printf("sorted ");
-   print_array(in_array, IN_ARRAY_SIZE);
-   print_statistics(stat_array, STAT_ARRAY_SIZE);
-   return 0;
-}
 
 void print_statistics(unsigned char *data_stat, unsigned int size)
 {
-   printf("Statistics:\n");
-   printf( "maximum: | %d |\n", stat_array[MAXIMUM_STAT_BYTE] );
-   printf( "minimum: | %d |\n", stat_array[MINIMUM_STAT_BYTE] );
-   printf( "median:  | %d |\n", stat_array[MEDIAN_STAT_BYTE] );
-   printf( "mean:    | %d |\n", stat_array[MEAN_STAT_BYTE] );
+   PRINTF("Statistics:\n");
+   PRINTF( "maximum: | %d |\n", stat_array[MAXIMUM_STAT_BYTE] );
+   PRINTF( "minimum: | %d |\n", stat_array[MINIMUM_STAT_BYTE] );
+   PRINTF( "median:  | %d |\n", stat_array[MEDIAN_STAT_BYTE] );
+   PRINTF( "mean:    | %d |\n", stat_array[MEAN_STAT_BYTE] );
 }
 
 void print_array(unsigned char *data, unsigned int size)
 {
-   printf("input array: |");
+   #ifdef VERBOSE
+   PRINTF("input array: |");
+   #endif
    for(int i = 0; i < size; i++)
    {
-      printf(" %d |", data[i]);
+      #ifdef VERBOSE
+      PRINTF(" %d |", data[i]);
+      #endif
    }
-   printf("\n");
+   #ifdef VERBOSE
+   PRINTF("\n");
+   #endif
 }
 
 unsigned char find_median(unsigned char *data, unsigned int size)

@@ -26,8 +26,6 @@
 #ifndef __TES1_H__
 #define __TES1_H__
 
-#include <stdio.h>
-
 /*********************************************************************
  * @fn      print_statistics
  *
